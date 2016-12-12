@@ -22,6 +22,51 @@ func incrementString(string:String) -> String{
     return "foo"
 }
 
+func hasDouble(string:String) -> Bool {
+    let characters = string.characters
+    var hasDoubleDouble = false
+    var firstRange: NSRange? = nil
+    
+    for (index,letter) in characters.enumerate() {
+    
+        guard index+1 < characters.count else { break }
+        
+        let nextCharacter = characters[characters.startIndex.advancedBy(index+1)]
+        
+        if hasDoubleDouble == false && nextCharacter == letter {
+            let doubleRange = NSMakeRange(index, 2)
+            
+            if let firstRange = firstRange where NSIntersectionRange(firstRange, doubleRange).length == 0 {
+                hasDoubleDouble = true
+            } else {
+                firstRange = doubleRange
+            }
+        }
+    }
+    
+    return hasDoubleDouble
+}
+
+func hasRun(string:String) -> Bool {
+    let characters = string.characters
+    
+    for (index,letter) in characters.enumerate() {
+        
+        guard index+2 < characters.count else { return false }
+        
+        let next = characters[characters.startIndex.advancedBy(index+1)]
+        let nextNext = characters[characters.startIndex.advancedBy(index+2)]
+        
+        let nextValue = next.value
+        let letterValue = letter.value
+        let difference = Int(nextValue) - Int(letterValue)
+        
+        if ( difference == 1 ) && ( nextNext.value - next.value == 1 )  {
+            return true
+        }
+    }
+    return false
+}
 
 
 func validPassword(password:String) -> Bool {
@@ -65,7 +110,7 @@ func validPassword(password:String) -> Bool {
             let letterValue = letter.value
             let difference = Int(nextValue) - Int(letterValue)
             
-            if ( difference == 1 ) && ( nextNext.value - nextCharacter.value == 1 )  {
+            if ( difference == 1 ) && ( nextNext.value - next.value == 1 )  {
                 return true
             }
             
@@ -85,14 +130,44 @@ extension Character {
     }
 }
 
-var newPassword = incrementString("hxbxwxba")
+"hxbaabcc"
+var otherPassword = "hxbxyaaa"
+var newPassword = "hxbxxyzz"
 
-var foo = validPassword(newPassword)
+hasDouble(newPassword)
+hasRun(newPassword)
 
-while !validPassword(newPassword) {
-    newPassword
-    newPassword = incrementString(newPassword)
+func valid2(password:String) -> Bool {
+    for (index,letter) in password.characters.enumerate() {
+        guard letter != "i" else { return false }
+        guard letter != "o" else { return false }
+        guard letter != "l" else { return false }
+    }
+    
+    return hasDouble(password) && hasRun(password)
 }
+
+var foo = valid2(newPassword)
+
+foo
+
+var shouldBreak = false
+//
+while !shouldBreak {
+//    newPassword
+    
+    
+    newPassword = incrementString(newPassword)
+    
+    
+    shouldBreak = valid2(newPassword)
+}
+
+newPassword
+//
+//
+//
+
 
 
 
