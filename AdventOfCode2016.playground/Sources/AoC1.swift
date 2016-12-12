@@ -1,5 +1,59 @@
 import UIKit
 
+public func countValidTriangles(triangles: [[Int]]) -> Int {
+    
+    let checked = triangles.map { (ints) -> Bool in
+        let sorted = ints.sorted()
+        return sorted[0] + sorted[1] > sorted[2]
+    }
+    
+    let count = checked.filter { $0 }
+    
+    return count.count
+}
+
+
+public func doTheThing(string: String) -> Int{
+    var triangles = [[Int]]()
+    
+    var column1 = [Int]()
+    var column2 = [Int]()
+    var column3 = [Int]()
+    
+    for line in string.components(separatedBy: "\n") {
+        
+        
+        let numbers = line.components(separatedBy: ", ").map { Int($0)! }
+        
+        column1.append(numbers[0])
+        column2.append(numbers[1])
+        column3.append(numbers[2])
+        
+        
+        
+        triangles.append(column1)
+        triangles.append(column2)
+        triangles.append(column3)
+        
+    }
+    
+    
+    func countValidTriangles(triangles: [[Int]]) -> Int {
+        
+        let checked = triangles.map { (ints) -> Bool in
+            let sorted = ints.sorted()
+            return sorted[0] + sorted[1] > sorted[2]
+        }
+        
+        let count = checked.filter { $0 }
+        
+        return count.count
+    }
+    
+    return countValidTriangles(triangles: triangles)
+    
+}
+
 
 
 //enum Direction: String {
