@@ -52,7 +52,6 @@ struct Spreadsheet {
     }
 }
 
-
 let sheet = Spreadsheet(data: rows)
 
 
