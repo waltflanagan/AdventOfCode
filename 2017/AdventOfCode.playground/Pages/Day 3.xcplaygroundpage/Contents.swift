@@ -74,7 +74,9 @@ func runningValueGreaterThan(_ number: Int) -> Int {
                         value += storage[point] ?? 0
                     }
                     
-                    storage[position] = value
+                    position.adjacent().flatMap { storage[point] }.reduce(0) { $0 + $1 }
+                    
+                    storage[position] = position.adjacent().flatMap { storage[point] }.reduce(0) { $0 + $1 }
                     lastValue = value
                 }
               

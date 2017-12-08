@@ -539,7 +539,7 @@ func passPhraseIdValidPart2(_ phrase: String) -> Bool {
     var seenWords = Set<NSCountedSet>()
     
     for word in words {
-        let wordComponents = NSCountedSet(array: Array(word.characters))
+        let wordComponents = NSCountedSet(array: Array(word))
         
         if seenWords.contains(wordComponents) {
             return false
