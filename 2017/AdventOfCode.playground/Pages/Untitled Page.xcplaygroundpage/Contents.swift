@@ -9,27 +9,19 @@ maze[0]
 var current = 0;
 var steps = 0;
 while current < maze.count {
-//    print("\(maze.enumerated().map { $0 == current ? "(\($1))" : "\($1)"  })")
-
     let previous = current
     
-//    print("jumping - \(maze[current])")
     current += maze[current]
 
     //Part 1
-//    maze[previous] += 1
     if maze[previous] > 2 {
         maze[previous] -= 1
-//        print("subtracting because - \(previous)")
-//        print("minus")
+
     } else {
         maze[previous] += 1
-//        print("adding because - \(previous)")
-
     }
     
     steps += 1
-//    print("\(maze)")
 }
 
 //maze[0]

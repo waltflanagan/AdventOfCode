@@ -66,18 +66,15 @@ func runningValueGreaterThan(_ number: Int) -> Int {
             for _ in 0..<sideSize {
                 guard lastValue <= number else { break }
                 
-                
                 if storage[position] == nil {
                     var value = 0
                     for point in position.adjacent() {
-//                        print("\(point) - \(storage[point] ?? 0)")
                         value += storage[point] ?? 0
                     }
                     
-                    position.adjacent().flatMap { storage[point] }.reduce(0) { $0 + $1 }
-                    
-                    storage[position] = position.adjacent().flatMap { storage[point] }.reduce(0) { $0 + $1 }
-                    lastValue = value
+//                    position.adjacent().flatMap { storage[point] }.reduce(0) { $0 + $1 }
+//
+//                    storage[position] = position.adjacent().flatMap { storage[point] }.reduce(0) { $0 + $1 }                   lastValue = value
                 }
               
                 position = position + direction
@@ -87,7 +84,6 @@ func runningValueGreaterThan(_ number: Int) -> Int {
             direction = nextDirection()
         }
         sideSize += 1
-//        lastValue += 1
     }
     
     return lastValue

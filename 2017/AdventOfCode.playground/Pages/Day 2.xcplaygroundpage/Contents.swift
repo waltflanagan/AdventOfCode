@@ -27,9 +27,7 @@ struct Spreadsheet {
     let data: [[Int]]
     
     var checksum: Int {
-        return data.map { (row) in
-            return row.max()! - row.min()!
-            }.reduce(0) { $0 + $1 }
+        return data.map { $0.max()! - $0.min()! }.reduce(0, +)
     }
     
     var checksum2: Int {

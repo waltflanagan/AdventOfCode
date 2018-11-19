@@ -518,7 +518,7 @@ hwcy ujdun bjjuvd jbdvju onnk xeyy mmp onkn qyzl
 jwfm ptjwrbl hhuv uolz adyweh qpj wxyogp igvnojq jmfw pqs fsnirby
 """
 
-func passPhraseIdValid(_ phrase: String) -> Bool {
+func passPhraseIsValid(_ phrase: String) -> Bool {
     let words = phrase.components(separatedBy: " ")
     
     var seenWords = Set<String>()
@@ -533,7 +533,7 @@ func passPhraseIdValid(_ phrase: String) -> Bool {
     return true
 }
 
-func passPhraseIdValidPart2(_ phrase: String) -> Bool {
+func passPhraseIsValidPart2(_ phrase: String) -> Bool {
     let words = phrase.components(separatedBy: " ")
     
     var seenWords = Set<NSCountedSet>()
@@ -555,7 +555,7 @@ func passPhraseIdValidPart2(_ phrase: String) -> Bool {
 let phrases = input.components(separatedBy: "\n")
 
 
-let count = phrases.map(passPhraseIdValidPart2).reduce(0) { (result, valid) -> Int in
+let count = phrases.map(passPhraseIsValidPart2).reduce(0) { (result, valid) -> Int in
     return result + (valid ? 1 : 0)
 }
 

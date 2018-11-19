@@ -9,16 +9,6 @@ public class Plate {
     public var balanced: Bool {
         return Set<Int>( children.map({ ($0.realWeight) })).count < 2
     }
-//    
-//    public var realWeight: Int {
-//        guard let cachedWeight = weights[name] else {
-//            let realWeight = weight + children.reduce(0, { $0 + $1.realWeight })
-//             weights[name] = realWeight
-//            return realWeight
-//        }
-//        
-//        return cachedWeight
-//    }
     
     public var realWeight: Int {
         return weight + children.reduce(0, { $0 + $1.realWeight })
