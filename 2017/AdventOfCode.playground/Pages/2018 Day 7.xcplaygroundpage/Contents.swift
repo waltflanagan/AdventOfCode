@@ -123,39 +123,26 @@ test[test.index(test.startIndex, offsetBy: 5)]
 test[test.index(test.startIndex, offsetBy: 36)]
 
 var result = [String]()
-var currentTime = 0
 
 class LetterOperation: Operation {
     
-    let delay: Int
-    var ticks = 1
-    
-    let group = DispatchGroup()
+    let duration: Int
+    var completion: Int = 0
     let identifier: String
     init(_ identifier: String) {
         self.identifier = identifier
-        delay = 60 + Int(identifier.unicodeScalars.first!.value - 64)
+        duration = 60 + Int(identifier.unicodeScalars.first!.value - 64)
     }
   
-    override func start() {
-        
-        
-        group.enter()
-        super.start()
-    }
-    
     override func main() {
-        group.wait()
+        let lastCompletion = dependencies.reduce(0, { (maxCompletion, operation) -> Int in
+            guard let operation = operation as? LetterOperation else { fatalError() }
+            return max(maxCompletion, operation.completion)
+        })
         
-    }
-    
-    
-    func tick() {
-     
-        if ticks == delay {
-            group.leave()
-        }
-        ticks += 1
+        completion = lastCompletion + duration
+        
+        print("\(identifier) completed at: \(completion)")
     }
 }
 
@@ -191,23 +178,6 @@ for op in operations.values.sorted(by: { $0.identifier < $1.identifier}) {
 queue.isSuspended = false
 
 
-
-while queue.operations.count > 0 {
-    
-    let running = queue.operations.filter({ $0.isExecuting })
-    print("\(running.count)")
-    for op in running {
-        (op as? LetterOperation)?.tick()
-    }
-    
-    if running.count > 0 {
-        currentTime += 1
-    }
-    usleep(1)
-        //    print("\(currentTime) ----- ")}
-}
-
-currentTime
 
 //
 //result.joined(separator: "")
